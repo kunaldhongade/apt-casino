@@ -1,19 +1,19 @@
-import HeaderText from "@/components/HeaderText";
+import carp from "@/public/images/games/Carp_diem.png";
+import crash from "@/public/images/games/crash.png";
+import dices from "@/public/images/games/dices.png";
+import fire_in_hole from "@/public/images/games/fire_in_the_hole.png";
+import fire from "@/public/images/games/fire_portal.png";
+import fortune from "@/public/images/games/fortune-tiger.png";
+import goo from "@/public/images/games/gates-of-olympus.png";
+import mines from "@/public/images/games/mines.png";
+import poker from "@/public/images/games/poker.png";
+import revenge from "@/public/images/games/revenge_of_loki.png";
+import Roulette from "@/public/images/games/roulette.png";
+import rush from "@/public/images/games/sugar_rush.png";
+import HeaderText from "@/src/components/HeaderText";
 import Image from "next/image";
-import Roulette from "@/images/games/roulette.png";
-import fortune from "@/images/games/fortune-tiger.png";
-import goo from "@/images/games/gates-of-olympus.png";
-import poker from "@/images/games/poker.png";
-import carp from "@/images/games/Carp_diem.png";
-import fire from "@/images/games/fire_portal.png";
-import revenge from "@/images/games/revenge_of_loki.png";
-import rush from "@/images/games/sugar_rush.png";
-import MagicBorder from "./MagicBorder";
-import crash from "@/images/games/crash.png";
-import fire_in_hole from "@/images/games/fire_in_the_hole.png";
-import dices from "@/images/games/dices.png";
-import mines from "@/images/games/mines.png";
 import Link from "next/link";
+import MagicBorder from "./MagicBorder";
 const MostPlayed = () => {
   const games = [
     { name: "Roulette", img: Roulette, link: "/game/roulette" },
@@ -25,7 +25,11 @@ const MostPlayed = () => {
     { name: "Revenge of Loki", img: revenge, link: "/game/revenge-of-loki" },
     { name: "Sugar Rush", img: rush, link: "/game/sugar-rush" },
     { name: "Crash", img: crash, link: "/game/crash" },
-    { name: "Fire in the Hole", img: fire_in_hole, link: "/game/fire-in-the-hole" },
+    {
+      name: "Fire in the Hole",
+      img: fire_in_hole,
+      link: "/game/fire-in-the-hole",
+    },
     { name: "Dices", img: dices, link: "/game/dices" },
     { name: "Mines", img: mines, link: "/game/mines" },
   ];
@@ -37,7 +41,7 @@ const MostPlayed = () => {
       />
 
       <div className="grid mt-5 grid-cols-4 gap-5 mb-10">
-        {games?.map((game,i) => (
+        {games?.map((game, i) => (
           <div key={i} className="w-full h-full ">
             <Link href={game.link} className="mb-10">
               <MagicBorder>
@@ -51,10 +55,7 @@ const MostPlayed = () => {
               </MagicBorder>
             </Link>
 
-            <span
-              className="font-display text-xl leading-10 uppercase "
-             
-            >
+            <span className="font-display text-xl leading-10 uppercase ">
               {game.name}
             </span>
           </div>

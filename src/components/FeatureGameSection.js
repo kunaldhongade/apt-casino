@@ -1,5 +1,5 @@
-import MagicBorder from "./MagicBorder";
 import Image from "next/image";
+import MagicBorder from "./MagicBorder";
 
 export default function FeatureGameSection() {
   return (

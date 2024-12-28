@@ -1,10 +1,9 @@
 "use client";
-import GradientBorderButton from "@/components/GradientBorderButton";
+import games from "@/public/images/games/games.png";
+import GradientBorderButton from "@/src/components/GradientBorderButton";
 import Image from "next/image";
-import games from "@/images/games/games.png";
-import { FaArrowLeft } from "react-icons/fa6";
-import { FaArrowRight } from "react-icons/fa6";
 import { useRef } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 const GameCarousel = () => {
   const scrollContainerRef = useRef(null);
@@ -41,12 +40,7 @@ const GameCarousel = () => {
                   <GradientBorderButton>Join Now</GradientBorderButton>
                 </span>
               </div>
-              <Image
-                src={games}
-                width={150}
-                height={200}
-                alt="games"
-              />
+              <Image src={games} width={150} height={200} alt="games" />
             </div>
           </div>
           <div className=" w-[490px] p-0.5 magic-gradient rounded-lg h-[280px]">
@@ -63,12 +57,7 @@ const GameCarousel = () => {
                   <GradientBorderButton>Join Now</GradientBorderButton>
                 </span>
               </div>
-              <Image
-                src={games}
-                width={150}
-                height={200}
-                alt="games"
-              />
+              <Image src={games} width={150} height={200} alt="games" />
             </div>
           </div>
           <div className=" w-[490px] p-0.5 magic-gradient rounded-lg h-[280px]">
@@ -85,12 +74,7 @@ const GameCarousel = () => {
                   <GradientBorderButton>Join Now</GradientBorderButton>
                 </span>
               </div>
-              <Image
-                src={games}
-                width={150}
-                height={200}
-                alt="games"
-              />
+              <Image src={games} width={150} height={200} alt="games" />
             </div>
           </div>
         </div>

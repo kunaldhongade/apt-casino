@@ -1,20 +1,20 @@
-import FeatureSection from '@/components/FeatureSection'
-import HeroSection from '@/components/HeroSection'
-import Navbar from '@/components/Navbar'
-import SponsorSection from '@/components/SponsorSection'
-import Footer from '@/components/Footer'
-import LetsPlaySection from '@/components/LetsPlaySection'
-import FeatureGameSection from '@/components/FeatureGameSection'
+import FeatureGameSection from "@/src/components/FeatureGameSection";
+import FeatureSection from "@/src/components/FeatureSection";
+import Footer from "@/src/components/Footer";
+import HeroSection from "@/src/components/HeroSection";
+import LetsPlaySection from "@/src/components/LetsPlaySection";
+import Navbar from "@/src/components/Navbar";
+import SponsorSection from "@/src/components/SponsorSection";
 
 export default function Home() {
   return (
     <div className="bg-[#070005]">
       <Navbar />
       <HeroSection />
-      <FeatureSection />
+      {/* <FeatureSection /> */}
       <FeatureGameSection />
       <LetsPlaySection />
       <Footer />
     </div>
-  )
+  );
 }
