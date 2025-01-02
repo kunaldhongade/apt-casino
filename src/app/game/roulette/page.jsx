@@ -18,6 +18,7 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 import currency from "currency.js";
 import React, { useEffect, useMemo, useReducer, useState } from "react";
 import { getContract, parseEther } from "viem";
+import { useAccount, useContractRead, useContractWrite, useNetwork, useSwitchNetwork, useWaitForTransaction } from 'wagmi';
 import {
   rouletteABI,
   rouletteContractAddress,
