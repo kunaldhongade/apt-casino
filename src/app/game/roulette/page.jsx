@@ -3,22 +3,22 @@ import Button from "@/src/components/Button";
 import Footer from "@/src/components/Footer";
 import Navbar from "@/src/components/Navbar";
 import TextFieldCurrency from "@/src/components/TextFieldCurrency";
-// import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 import ClearIcon from "@mui/icons-material/Clear";
 import InfoIcon from "@mui/icons-material/Info";
 import UndoIcon from "@mui/icons-material/Undo";
 import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
+// import Snackbar from "@mui/material/Snackbar";
+import { config } from '@/src/config';
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-// import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { useAppKitAccount } from "@reown/appkit/react";
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
+import { getBalance, simulateContract, watchContractEvent, writeContract } from '@wagmi/core';
 import currency from "currency.js";
 import React, { useEffect, useMemo, useReducer, useState } from "react";
 import { getContract, parseEther } from "viem";
-import { useAccount, useContractRead, useContractWrite, useNetwork, useSwitchNetwork, useWaitForTransaction } from 'wagmi';
 import {
   rouletteABI,
   rouletteContractAddress,
@@ -27,12 +27,6 @@ import {
 } from "./contractDetails";
 import { muiStyles } from "./styles";
 import { rouletteOdds, rouletteTutorial } from "./tutorials";
-import {
-  publicMantleSepoliaClient,
-  publicPolygonClient,
-  walletMantleSepoliaClient,
-  walletPolygonClient,
-} from "./ViemClient";
 
 const TooltipWide = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -387,7 +381,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function GameRoulette() {
   const [events, dispatchEvents] = useReducer(eventReducer, []);
-
+  const { address, isConnected } = useAppKitAccount()
   const [bet, setBet] = useState(0);
   // all the inside bets
   const [inside, dispatchInside] = useReducer(
@@ -424,7 +418,7 @@ export default function GameRoulette() {
   ]);
 
   const winningsListener = useMemo(() => {
-    return publicMantleSepoliaClient.watchContractEvent({
+    return watchContractEvent(config, {
       address: rouletteContractAddress,
       abi: rouletteABI,
       eventName: "RandomNumberGenerated",
@@ -437,13 +431,13 @@ export default function GameRoulette() {
   }, []);
 
   const betResultListener = useMemo(() => {
-    return publicMantleSepoliaClient.watchContractEvent({
+    return watchContractEvent(config, {
       address: rouletteContractAddress,
       abi: rouletteABI,
       eventName: "BetResult",
       onLogs: (logs) => {
         const { player, amount, won } = logs[0].args;
-        if (player.toLowerCase() === primaryWallet.address.toLowerCase()) {
+        if (player.toLowerCase() === address.toLowerCase()) {
           setWinnings(won ? parseFloat(amount) / 1e18 : 0);
           console.log(`Bet Result - Won: ${won}, Amount: ${amount}`);
         }
@@ -540,37 +534,37 @@ export default function GameRoulette() {
   const lockBet = async () => {
     setSubmitDisabled(true);
     let betSpread = getBetArray();
-    if (primaryWallet?.address) {
-      let addr = primaryWallet.address;
+    if (address) {
 
       const amount = parseEther("" + total + 1);
       console.log(betSpread);
-      const approvalRequest = await publicMantleSepoliaClient.simulateContract({
-        address: tokenContractAddress,
-        abi: tokenABI,
-        functionName: "approve",
-        args: [rouletteContractAddress, amount],
-        account: addr,
-      });
+      // const approvalRequest = await simulateContract(config, {
+      //   address: tokenContractAddress,
+      //   abi: tokenABI,
+      //   functionName: "approve",
+      //   args: [rouletteContractAddress, amount],
+      //   account: address,
+      // });
 
-      const approvalResponse = await walletMantleSepoliaClient.writeContract(
-        approvalRequest.request
-      );
+      // const approvalResponse = await writeContract(
+      //   approvalRequest.request
+      // );
 
-      if (!approvalResponse) {
-        console.error("Approval failed");
-        setSubmitDisabled(false);
-        return;
-      }
+      // if (!approvalResponse) {
+      //   console.error("Approval failed");
+      //   setSubmitDisabled(false);
+      //   return;
+      // }
 
-      await walletMantleSepoliaClient.writeContract(approvalRequest.request);
+      // await writeContract(approvalRequest.request);
       // place bets
-      await walletMantleSepoliaClient.writeContract({
-        address: rouletteContractAddress,
+      writeContract(config, {
         abi: rouletteABI,
+        address: rouletteContractAddress,
         functionName: "placeBet",
-        args: [betType, betValue, amount],
-        account: addr,
+        args: [99, 9, 100],
+        // args: [betType, betValue, amount],
+        account: address,
       });
     }
     return;
@@ -693,21 +687,21 @@ export default function GameRoulette() {
   const handleWithdrawWinnings = async (e) => {
     e.preventDefault();
 
-    if (!primaryWallet || !primaryWallet.address) {
+    if (!address || !isConnected) {
       console.error("Wallet not connected.");
       alert("Please connect your wallet.");
       return;
     }
 
     try {
-      const addr = primaryWallet.address;
+      const addr = address;
       const amount = parseEther(winnings.toString()); // Use winnings as the amount to withdraw
 
       reset(e); // Reset the state after withdrawing
 
       // Simulate the contract interaction
       const withdrawSimulation =
-        await publicMantleSepoliaClient.simulateContract({
+        await simulateContract(config, {
           address: rouletteContractAddress,
           abi: rouletteABI,
           functionName: "withdrawTokens",
@@ -716,7 +710,7 @@ export default function GameRoulette() {
         });
 
       // Execute the contract transaction
-      const withdrawResponse = await walletMantleSepoliaClient.writeContract(
+      const withdrawResponse = await writeContract(
         withdrawSimulation.request
       );
 
@@ -758,15 +752,19 @@ export default function GameRoulette() {
         }
       }
 
-      // load balance
-      await publicMantleSepoliaClient
-        .getBalance({ address: primaryWallet?.address })
-        .then((res) => {
-          setBalance(parseInt(res) * 1e-18);
-        })
-        .catch((err) => {
-          setBalance(0);
-        });
+      const balance = await getBalance(config, { address });
+      setBalance(balance);
+      console.log("Balance: ", balance);
+
+      // // load balance
+      // await publicMantleSepoliaClient
+      //   .getBalance({ address: address })
+      //   .then((res) => {
+      //     setBalance(parseInt(res) * 1e-18);
+      //   })
+      //   .catch((err) => {
+      //     setBalance(0);
+      //   });
     };
     checkNetwork();
   }, []);
