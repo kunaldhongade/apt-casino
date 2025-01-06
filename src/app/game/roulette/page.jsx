@@ -560,9 +560,10 @@ export default function GameRoulette() {
       // place bets
       writeContract(config, {
         abi: rouletteABI,
+        value: 45055,
         address: rouletteContractAddress,
         functionName: "placeBet",
-        args: [99, 9, 100],
+        args: [[1, 2], [7, 8]],
         // args: [betType, betValue, amount],
         account: address,
       });
