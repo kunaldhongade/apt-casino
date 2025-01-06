@@ -9,6 +9,7 @@ He was very annoyed of this and that's how APT-Casino born, which is a combinati
 ## 🚨 Problem
 
 The traditional online gambling industry faces numerous challenges:
+
 - **Unfair Game Outcomes**: 90% Platforms manipulate results, leading to unfair gameplay.
 - **High Fees**: Exorbitant fees for deposits, withdrawals, and gameplay.
 - **Restrictive Withdrawal Policies**: Users struggle with unrealistic conditions to access funds.
@@ -18,6 +19,7 @@ The traditional online gambling industry faces numerous challenges:
 ## ✅ Solution
 
 APT-Casino addresses these problems with a fair, transparent, and decentralized ecosystem:
+
 - **Provably Fair Gaming**: Leveraging VRF (Verifiable Random Function) for unbiased outcomes.
 - **Low Fees**: Built on Mantle Blockchain, minimizing transaction costs.
 - **Flexible Withdrawal Policies**: No restrictive withdrawal conditions.
@@ -27,11 +29,13 @@ APT-Casino addresses these problems with a fair, transparent, and decentralized 
 ## ✨ Key Features
 
 ### 1. **AI - SocialFi Aspect**
+
 - Create **AI-generated NFT profile pictures** based on user inputs.
 - Explore community leaderboards and other players' profiles, including recent activities and ENS details.
 - Engage socially within a secure Web3 environment.
 
 ### 2. **GameFi - Gaming Aspect**
+
 - Fully on-chain **European roulette**:
   - Place bets such as straight, split, street, corner, red, black, high, low, and more.
   - Outcomes powered by **VRF** for transparent randomness.
@@ -39,6 +43,7 @@ APT-Casino addresses these problems with a fair, transparent, and decentralized 
 - Future game additions: Plinko, blackjack, and other popular casino games.
 
 ### 3. **DeFi - Lending Aspect**
+
 - Borrow **APT-Casino Tokens (APTC)** by using $MNT tokens as collateral.
 - Seamless gameplay without liquidating existing holdings.
 - Real-time asset pricing powered by decentralized oracles.
@@ -59,6 +64,8 @@ APT-Casino addresses these problems with a fair, transparent, and decentralized 
 - **Token.sol (APTC)**: https://sepolia.mantlescan.xyz/address/0x139f06D9F9374d714f786f65dB8791B6339a50A2
 - **Roulette.sol**: https://sepolia.mantlescan.xyz/address/0x32Ae204Fb204888e9Fa79CC2afD11cF398C8Eb2E#code
 
+https://sepolia.mantlescan.xyz/address/0x402ce460c8094af87a01d4bb0757a7f022e4b3d9
+
 ## 🌍 Market Opportunity
 
 The global online gambling market is projected to reach **$150 billion by 2030**. APT-Casino bridges the gap between traditional gambling and Web3, offering unparalleled transparency and innovation.
@@ -66,11 +73,13 @@ The global online gambling market is projected to reach **$150 billion by 2030**
 ## 💰 Revenue Model and Future Roadmap
 
 ### Revenue Streams:
+
 - **Platform Fees**: A small percentage of transactions.
 - **In-Game Purchases**: Skins, NFTs, and premium features.
 - **DeFi Services**: Staking, farming, and yield generation.
 
 ### Future Roadmap:
+
 - **Mainnet Launch**: Transition from testnet to mainnet.
 - **Gasless Transactions**: Enhance user convenience.
 - **New Games**: Expand the library with more on-chain casino games.
@@ -102,13 +111,15 @@ cd legendary-invention
 ## 3. Install Dependencies
 
 Open your terminal and run the following command to install all required dependencies:
+
 ```bash
-npm install --f
+npm install
 ```
 
 ## 4. Start the Development Server
 
 To start the application in development mode, run:
+
 ```bash
 npm run dev
 ```

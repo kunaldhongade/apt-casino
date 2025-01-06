@@ -1,251 +1,163 @@
 export const rouletteContractAddress =
-  "0x32Ae204Fb204888e9Fa79CC2afD11cF398C8Eb2E";
+  "0x402cE460c8094af87a01d4Bb0757A7F022E4B3D9";
 export const rouletteABI = [
   {
-    inputs: [
-      {
-        internalType: "contract IERC20",
-        name: "_token",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_minBet",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_maxBet",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "constructor",
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "player",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "player",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "betType",
+        "type": "uint8"
       },
       {
-        indexed: false,
-        internalType: "enum Roulette.BetType",
-        name: "betType",
-        type: "uint8",
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "number",
+        "type": "uint8"
       },
       {
-        indexed: false,
-        internalType: "uint8",
-        name: "betValue",
-        type: "uint8",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "BetPlaced",
-    type: "event",
+    "name": "BetPlaced",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "player",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "won",
-        type: "bool",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "BetResult",
-    type: "event",
+    "name": "FundsDeposited",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "randomNumber",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "address",
+        "name": "player",
+        "type": "address"
       },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "RandomNumberGenerated",
-    type: "event",
+    "name": "Payout",
+    "type": "event"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint8[]",
+        "name": "betTypes",
+        "type": "uint8[]"
       },
+      {
+        "internalType": "uint8[]",
+        "name": "numbers",
+        "type": "uint8[]"
+      }
     ],
-    name: "bets",
-    outputs: [
-      {
-        internalType: "address",
-        name: "player",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "enum Roulette.BetType",
-        name: "betType",
-        type: "uint8",
-      },
-      {
-        internalType: "uint8",
-        name: "betValue",
-        type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    "name": "placeBet",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "maxBet",
-    outputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "winningNumber",
+        "type": "uint8"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "SpinResult",
+    "type": "event"
   },
   {
-    inputs: [],
-    name: "minBet",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "payable",
+    "type": "receive"
   },
   {
-    inputs: [],
-    name: "owner",
-    outputs: [
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "enum Roulette.BetType",
-        name: "betType",
-        type: "uint8",
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       },
       {
-        internalType: "uint8",
-        name: "betValue",
-        type: "uint8",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "placeBet",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
+    "name": "playerBets",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
+        "internalType": "uint8",
+        "name": "betType",
+        "type": "uint8"
       },
-    ],
-    name: "playerBets",
-    outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint8",
+        "name": "number",
+        "type": "uint8"
       },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "randomResult",
-    outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "token",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "withdrawTokens",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-];
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
 
 export const tokenContractAddress =
   "0x139f06D9F9374d714f786f65dB8791B6339a50A2";
@@ -582,3 +494,4 @@ export const tokenABI = [
     type: "function",
   },
 ];
+
