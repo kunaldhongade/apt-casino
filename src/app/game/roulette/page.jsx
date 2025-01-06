@@ -752,9 +752,11 @@ export default function GameRoulette() {
         }
       }
 
-      const balance = await getBalance(config, { address });
-      setBalance(balance);
-      console.log("Balance: ", balance);
+      if (address) {
+        const balance = await getBalance(config, { address });
+        setBalance(parseInt(balance.value) * 1e-18);
+        console.log("Balance: ", balance);
+      }
 
       // // load balance
       // await publicMantleSepoliaClient
@@ -1101,6 +1103,7 @@ export default function GameRoulette() {
               ) : (
                 <Typography color="text.secondary">
                   Total Balance{" "}
+
                   {currency(balance, { pattern: "#", precision: 4 }).format()}
                 </Typography>
               )}
